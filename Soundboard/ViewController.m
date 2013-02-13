@@ -26,4 +26,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(IBAction)buttonPressed:(id)originator
+{
+    UIButton *theButton = (UIButton *)originator;
+    NSString *tag = [NSString stringWithFormat:@"%d", theButton.tag];
+    NSString *soundFile = [tag stringByAppendingString:@".wav"];
+    NSString *path = [NSString stringWithFormat:[@"%@/" stringByAppendingString:soundFile], [[NSBundle mainBundle] resourcePath]];
+    NSURL *theURL = [NSURL fileURLWithPath:path];
+    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:theURL error:nil];
+    [audioPlayer play];
+}
+
 @end
